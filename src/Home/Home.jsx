@@ -18,10 +18,12 @@ const Home = () => {
     <div>
       <NavBar></NavBar>
       <Banner></Banner>
-      {users && <h1>{users.length}</h1>}
-      {users?.map((blog) => (
-        <RecentBlog key={blog._id} blog={blog}></RecentBlog>
-      ))}
+      <div className="grid grid-cols-3">
+        {/* {users && <h1>{users.length}</h1>} */}
+        {users?.map((blog) => (
+          <RecentBlog key={blog._id} blog={blog}></RecentBlog>
+        ))}
+      </div>
       <Tips></Tips>
     </div>
   );
