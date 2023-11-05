@@ -1,8 +1,46 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import swal from "sweetalert";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
+  const { createUser, updateUser } = useContext(AuthContext);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const photo = form.image.value;
+    // console.log(name, email, password, photo);
+    if (password.length < 6) {
+      return toast.error("Sorry your password is less than 6 character");
+    } else if (/^[a-zA-Z0-9]*$/.test(password)) {
+      return toast.error("There have no special character ");
+    } else if (!/[A-Z]/.test(password)) {
+      return toast.error("There have no capital letter ");
+    } else {
+      swal("Good job!", "godd password", "success");
+    }
+    createUser(email, password)
+      .then((result) => {
+        updateUser(name, photo).then(() => {
+          console.log(result.user);
+          Navigate("/");
+        });
+        // swal("Good job!", "SuccessFully Registered", "success");
+      })
+      .catch((error) => {
+        console.error(error);
+        swal("Something is wrong!");
+      });
+  };
   return (
     <div>
+      <ToastContainer />
       <div className="flex justify-center bg-blue-950 h-[800px]">
         <div className="relative rounded-2xl flex flex-col bg-gradient-to-r from-[#360033] to-[#0b8793] w-[500px]  text-gray-700 shadow-xl h-[580px] mt-10">
           <h4 className=" font-sans text-2xl mt-3 text-white font-semibold leading-snug tracking-normal flex justify-center antialiased">
@@ -11,7 +49,10 @@ const Register = () => {
           <p className="mt-1 flex justify-center font-sans text-orange-400 font-normal leading-relaxed text-gray-700 antialiased">
             Enter your details to register.
           </p>
-          <form className="mt-8 mb-2 ml-14 w-80 max-w-screen-lg sm:w-96">
+          <form
+            onSubmit={handleRegister}
+            className="mt-8 mb-2 ml-14 w-80 max-w-screen-lg sm:w-96"
+          >
             <div className="mb-4 flex flex-col gap-6">
               <div className="relative h-11 w-full min-w-[200px]">
                 <input

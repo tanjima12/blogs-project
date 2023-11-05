@@ -1,7 +1,18 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { FaUserAlt } from "react-icons/fa";
 
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleSignout = () => {
+    logOut()
+      .then((result) => {
+        console.log(result, "successfully log out");
+      })
+      .catch((error) => console.error(error));
+  };
   return (
     <div>
       <div className="lg:ml-10 lg:mr-10 mt-5">
@@ -27,22 +38,43 @@ const NavBar = () => {
               <Dropdown.Item>Sign out</Dropdown.Item>
             </Dropdown>
             <Navbar.Toggle />
-            <Link to="/login">
-              <button className=" rounded-lg px-8 py-2 bg-green-800 text-white hover:bg-orange-800">
-                LogIn
-              </button>
-            </Link>
-            <Link to="/register">
-              <button className=" block w-full select-none rounded-lg bg-amber-600 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                Register
-              </button>
-            </Link>
+            {user ? (
+              <>
+                <img
+                  className="h-12 w-12 rounded-full"
+                  src={user.photoURL}
+                ></img>
+                <p className="mt-3">{user.displayName}</p>
+                <button
+                  onClick={handleSignout}
+                  className="btn btn-outline rounded-lg bg-red-200 px-10 border-none mr-3"
+                >
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                <FaUserAlt className="text-3xl "></FaUserAlt>
+                <Link to="/login">
+                  <button className=" rounded-lg px-8 py-2 bg-green-800 text-white hover:bg-orange-800">
+                    LogIn
+                  </button>
+                </Link>
+                <Link to="/register">
+                  <button className=" block w-full select-none rounded-lg bg-amber-600 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                    Register
+                  </button>
+                </Link>
+              </>
+            )}
           </div>
           <Navbar.Collapse>
             <Link to="/" className="text-xl">
               Home
             </Link>
-            <Link className="text-xl">Add Blog</Link>
+            <Link to="/addBlog" className="text-xl">
+              Add Blog
+            </Link>
             <Link className="text-xl">All Blogs</Link>
             <Link className="text-xl">Feature Blogs</Link>
             <Link className="text-xl">WishLists</Link>

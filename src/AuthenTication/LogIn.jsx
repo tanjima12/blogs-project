@@ -1,12 +1,51 @@
-import { Link } from "react-router-dom";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const LogIn = () => {
+  const [mainUser, setMainUser] = useState(null);
+  const { logIn } = useContext(AuthContext);
+  const auth = getAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const provider = new GoogleAuthProvider();
+  const handleGoggleLogIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(result.user);
+        setMainUser(user);
+        navigate(location.state ? location?.state : "/");
+        return swal("SuccessFully log in");
+      })
+      .catch((error) => console.error(error));
+  };
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    logIn(email, password)
+      .then((result) => {
+        console.log(result.user);
+        navigate(location.state ? location?.state : "/");
+        toast.success("successFully log in");
+      })
+      .catch((error) => console.error(error));
+    toast.error("Sorry Something is wrong");
+  };
   return (
     <div>
+      <ToastContainer />
       <div className="flex justify-center bg-blue-950 h-[800px]">
         <div className="box mt-40">
           <span className="borderline"></span>
-          <form>
+          <form onSubmit={handleLogIn}>
             <h1 className="text-2xl">Sign In</h1>
             <div className="inputBox">
               <input type="text" name="email" placeholder="Email" required />
@@ -37,7 +76,10 @@ const LogIn = () => {
               </Link>
             </div>
             <div className="flex gap-2 justify-center mt-5">
-              <img src="https://i.ibb.co/tbswKCh/google-300221.png"></img>
+              <img
+                onClick={handleGoggleLogIn}
+                src="https://i.ibb.co/tbswKCh/google-300221.png"
+              ></img>
               <h2 className="text-green-500">Log in With Google</h2>
             </div>
           </form>

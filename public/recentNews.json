@@ -1,0 +1,38 @@
+// [
+//   {
+//     "title": "Exploring the Serengeti",
+//     "img": "https://i.ibb.co/6FDWjvv/gettyimages-1141711907-612x612.jpg",
+//     "shortdescription": "A thrilling safari adventure in the heart of Africa's wilderness.",
+//     "category": "Safari"
+//   },
+//   {
+//     "title": "Paradise Found: Bali Beaches",
+//     "img": "https://i.ibb.co/PhdD7ts/SAVE-20231105-131119.jpg",
+//     "shortdescription": "Discover the stunning beaches and vibrant culture of Bali.",
+//     "category": "Beach"
+//   },
+//   {
+//     "title": "Hiking the Inca Trail",
+//     "img": "https://i.ibb.co/qRkC9hy/image-processing20181012-4-ly5kv5.jpg",
+//     "shortdescription": "An unforgettable journey to Machu Picchu through ancient ruins and breathtaking landscapes.",
+//     "category": "Adventure"
+//   },
+//   {
+//     "title": "Cruising the Mediterranean",
+//     "img": "https://i.ibb.co/Mp2sgQ9/Cover-Mediterranean-Cruisesepb0310.webp",
+//     "shortdescription": "A relaxing cruise through the beautiful Mediterranean, exploring coastal cities and islands.",
+//     "category": "Cruise"
+//   },
+//   {
+//     "title": "Wandering the Streets of Paris",
+//     "img": "https://i.ibb.co/R7vFXK2/stephan-valentin-Ro9-Vhcb-Xzv8-unsplash.jpg",
+//     "shortdescription": "A romantic journey through the enchanting streets of the City of Love.",
+//     "category": "City"
+//   },
+//   {
+//     "title": "Discovering the Amazon Rainforest",
+//     "img": "https://i.ibb.co/m8f93qP/man-with-hiking-equipment-walking-mouton-forest-1.jpg",
+//     "shortdescription": "An expedition into the heart of the Amazon rainforest, home to unique wildlife and lush landscapes.",
+//     "category": "Nature"
+//   }
+// ]
