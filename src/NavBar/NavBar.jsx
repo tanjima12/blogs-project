@@ -75,7 +75,9 @@ const NavBar = () => {
             <Link to="/addBlog" className="text-xl">
               Add Blog
             </Link>
-            <Link className="text-xl">All Blogs</Link>
+            <Link to="/allBlog" className="text-xl">
+              All Blogs
+            </Link>
             <Link className="text-xl">Feature Blogs</Link>
             <Link className="text-xl">WishLists</Link>
           </Navbar.Collapse>

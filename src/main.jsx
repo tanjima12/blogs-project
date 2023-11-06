@@ -16,6 +16,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import AllBlogs from "./AllBlogs/AllBlogs";
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
+
       {
         path: "/login",
         element: <LogIn></LogIn>,
@@ -38,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/addBlog",
         element: <AddBlogs></AddBlogs>,
+      },
+      {
+        path: "/allBlog",
+        element: <AllBlogs></AllBlogs>,
       },
     ],
   },
