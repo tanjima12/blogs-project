@@ -27,7 +27,7 @@ const Home = () => {
         <div className="bg">
           <div className="grid grid-cols-3 mt-5 ml-36  ">
             {/* {users && <h1>{users.length}</h1>} */}
-            {users?.map((blog) => (
+            {users?.slice(0, 6).map((blog) => (
               <RecentBlog key={blog._id} blog={blog}></RecentBlog>
             ))}
           </div>
