@@ -1,7 +1,10 @@
 // import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
 import NavBar from "../NavBar/Navbar";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const AddBlogs = () => {
+  const { user } = useContext(AuthContext);
   //   const { data } = useQuery({
   //     queryKey: ["AddBlogs"],
   //     queryFn: async () => {
@@ -13,9 +16,12 @@ const AddBlogs = () => {
     e.preventDefault();
     const form = e.target;
 
+    const email = form.email.value;
+    const name = form.name.value;
     const title = form.title.value;
     const Category = form.category.value;
     const ShortDescription = form.description.value;
+    const Longdescription = form.longdescription.value;
     const time = parseInt(form.time.value);
     const PhotoUrl = form.PhotoUrl.value;
 
@@ -26,19 +32,22 @@ const AddBlogs = () => {
       ShortDescription,
       time,
       PhotoUrl,
+      email,
+      name,
+      Longdescription,
     };
 
-    // Send the new blog entry to the server
     fetch("http://localhost:5006/addBlog", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", // Correct content type
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(newBlogEntry),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        form.reset();
       });
   };
 
@@ -51,6 +60,30 @@ const AddBlogs = () => {
             Add Your Blogs
           </h5>
           <form onSubmit={handleAddBlogs} className="space-y-6">
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                placeholder={user.displayName}
+                value={user.displayName}
+              />
+            </div>
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                placeholder={user.email}
+                value={user.email}
+              />
+            </div>
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Blog Title
@@ -79,6 +112,17 @@ const AddBlogs = () => {
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Short Description
+              </label>
+              <input
+                type="text"
+                name="longdescription"
+                placeholder="long Description"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              />
+            </div>
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Long Description
               </label>
               <input
                 type="text"

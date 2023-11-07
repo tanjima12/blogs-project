@@ -29,6 +29,7 @@ const Register = () => {
       .then((result) => {
         updateUser(name, photo).then(() => {
           console.log(result.user);
+          form.reset();
           Navigate("/");
         });
         // swal("Good job!", "SuccessFully Registered", "success");

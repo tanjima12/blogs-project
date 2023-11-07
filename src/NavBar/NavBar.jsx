@@ -6,6 +6,7 @@ import { FaUserAlt } from "react-icons/fa";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
+  console.log(user);
   const handleSignout = () => {
     logOut()
       .then((result) => {
@@ -54,7 +55,7 @@ const NavBar = () => {
               </>
             ) : (
               <>
-                <FaUserAlt className="text-3xl "></FaUserAlt>
+                {/* <FaUserAlt className="text-3xl "></FaUserAlt> */}
                 <Link to="/login">
                   <button className=" rounded-lg px-8 py-2 bg-green-800 text-white hover:bg-orange-800">
                     LogIn

@@ -37,7 +37,7 @@ const LogIn = () => {
         toast.success("successFully log in");
       })
       .catch((error) => console.error(error));
-    toast.error("Sorry Something is wrong");
+    // toast.error("Sorry Something is wrong");
   };
   return (
     <div>
@@ -75,11 +75,11 @@ const LogIn = () => {
                 Register
               </Link>
             </div>
-            <div className="flex gap-2 justify-center mt-5">
-              <img
-                onClick={handleGoggleLogIn}
-                src="https://i.ibb.co/tbswKCh/google-300221.png"
-              ></img>
+            <div
+              className="flex gap-2 justify-center mt-5"
+              onClick={handleGoggleLogIn}
+            >
+              <img src="https://i.ibb.co/tbswKCh/google-300221.png"></img>
               <h2 className="text-green-500">Log in With Google</h2>
             </div>
           </form>
