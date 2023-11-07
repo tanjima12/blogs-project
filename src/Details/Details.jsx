@@ -1,29 +1,71 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import NavBar from "../NavBar/Navbar";
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
-const Details = ({ blogId }) => {
+const Details = () => {
   const { user } = useContext(AuthContext);
   const loader = useLoaderData();
-  const UserEmail = user ? user.email : "";
-  const blogEmail = loader ? loader.authorEmail : "";
-  const { _id, title, Category, ShortDescription, time, PhotoUrl } =
-    loader || {};
-  //   console.log(loader);
 
-  // const { id } = useParams();
-  // const [blogDetails, setBlogDetails] = useState(null);
+  const {
+    _id,
+    title,
+    Category,
+    ShortDescription,
+    email,
+    time,
+    PhotoUrl,
+    Longdescription,
+  } = loader || {};
+
+  const { blogId } = useParams();
+  // console.log(email);
+  const [comments, setComments] = useState([]);
+  // const [canComment, setCanComment] = useState(true);
+  // const [blogAuthorId, setBlogAuthorId] = useState(null);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5006/blog/${blogId}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setBlogAuthorId(data.authorId);
+  //       console.log("data", data);
+  //     })
+  //     .catch((error) => console.error("Error fetching blog details:", error));
+  // }, [blogId]);
+  // console.log("user", user?.email);
+  // console.log("blog", blogAuthorId);
 
   // useEffect(() => {
-  //   // Make an API request to fetch the blog details
-  //   fetch(`http://localhost:5006/details/${id}`) // Replace with your actual API endpoint
+  //   fetch(`http://localhost:5006/comments/${blogId}`)
   //     .then((response) => response.json())
-  //     .then((data) => setBlogDetails(data));
-  // }, [id]);
+  //     .then((data) => {
+  //       console.log("Fetched comments:", data);
+  //       setComments(data);
+  //     })
+  //     .catch((error) => console.error("Error fetching comments:", error));
+  // }, [blogId]);
+
+  // console.log("blogAuthorId:", blogAuthorId);
+  // console.log("isCurrentUserBlogAuthor:", isCurrentUserBlogAuthor);
+  // console.log(loader);
+  // if (!loading || !loading.authorEmail) {
+  //   return <div>Loading...</div>;
+  // }
+
+  const { id } = useParams();
+  // const [blogDetails, setBlogDetails] = useState(null);
+
+  useEffect(() => {
+    // Make an API request to fetch the blog details
+    fetch(`http://localhost:5006/details/${id}`) // Replace with your actual API endpoint
+      .then((response) => response.json())
+      .then((data) => setBlogDetails(data));
+  }, [id]);
+
   const handleComment = (e) => {
     e.preventDefault();
+
     const form = e.target;
     const comment = form.comment.value;
     console.log(comment);
@@ -34,7 +76,7 @@ const Details = ({ blogId }) => {
       userProfilePicture: user ? user.photoURL : "",
     };
     // http://localhost:5006/comment
-    fetch(`http://localhost:5006/comment`, {
+    fetch(`http://localhost:5006/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,206 +85,105 @@ const Details = ({ blogId }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setComments([...comments, comment]);
         console.log(data);
         form.reset();
       });
   };
-  const { data: commenter } = useQuery({
-    queryKey: ["AddBlogs"],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5006/comment/${blogId}`);
-      return res.json();
-    },
-  });
+  // const { data } = useQuery({
+  //   queryKey: ["AddBlogs"],
+  //   queryFn: async () => {
+  //     const res = await fetch(`http://localhost:5006/comments/${_id}`);
+  //     console.log("commentdata", res.json());
+  //     return res.json();
+  //   },
+  // });
+  useEffect(() => {
+    fetch(`http://localhost:5006/comments/${_id}`) // Replace with your actual API endpoint
+      .then((response) => response.json())
+      .then((data) => {
+        setComments(data);
+        console.log("commentdata", data);
+      });
+  }, [_id]);
   return (
     <div>
       <NavBar></NavBar>
       <div className="">
         <div className="flex gap-5 justify-center mt-10 ">
           <div>
-            <img src={PhotoUrl} className="h-96 w-[450px] rounded-3xl"></img>
+            <img
+              src={PhotoUrl}
+              className="h-[600px] w-[500px] rounded-3xl"
+            ></img>
           </div>
-          <div className="card">
+          <div className="card ">
             <div className="content">
               <p className="heading">{title}</p>
               <p className="para">{ShortDescription}</p>
+              <p>{Longdescription}</p>
               <div className="flex gap-20">
                 <p>{time}</p>
                 <p>{Category}</p>
               </div>
-              <button className="btn">Read more</button>
+              {user && user?.email == email ? (
+                <button className="btn">Update</button>
+              ) : (
+                <button className="btn">Read more</button>
+              )}
             </div>
           </div>
         </div>
 
-        <div>
-          {commenter &&
-            commenter.map((comment) => (
-              <div key={comment._id}>
-                <p>{comment.comment}</p>
-                <p>{comment.userName}</p>
-                <img src={comment.userProfilePicture} alt="User Profile" />
-              </div>
+        <div className="flex justify-center mt-10">
+          <ul>
+            {comments?.map((comment) => (
+              <li key={comment._id}>
+                <div className="flex  items-center">
+                  <img
+                    src={comment.userProfilePicture}
+                    className="h-20 w-20 rounded-lg"
+                  ></img>
+                  <p>{comment.userName}</p>
+                </div>
+                <p>
+                  <span className="text-xl ">Comment: </span>
+                  {comment.comment}
+                </p>
+                {/* <strong>{comment.userName}:</strong> {comment.comment} */}
+              </li>
             ))}
+          </ul>
         </div>
-        {UserEmail !== blogEmail ? (
-          <div className="bg-emerald-950">
+
+        {user && user?.email !== email ? (
+          <div className="comment-form">
             <form onSubmit={handleComment}>
-              <div className="w-full mb-4 border rounded-lg mt-10">
-                <div className="px-4 py-2 rounded-t-lg dark:bg-gray-800">
-                  <label className="sr-only">Your comment</label>
-                  <textarea
-                    id="comment"
-                    rows="4"
-                    name="comment"
-                    className="w-full px-0 text-sm rounded-lg text-gray-900 mt-10"
-                    placeholder="Write a comment..."
-                    required
-                  ></textarea>
-                </div>
+              <div className="form-group flex items-center justify-center gap-5 mt-10 mb-10">
+                <label htmlFor="comment" className="text-2xl text-emerald-950">
+                  Comment:
+                </label>
+                <textarea
+                  id="comment"
+                  rows="1"
+                  name="comment"
+                  className="form-control w-96"
+                  placeholder="Write a comment..."
+                  required
+                ></textarea>
 
-                <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-                  <button
-                    type="submit"
-                    className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue"
-                  >
-                    Post comment
-                  </button>
-                  <div className="flex pl-0 space-x-1 sm:pl-2">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 12 20"
-                      >
-                        <path
-                          stroke="currentColor"
-                          d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6"
-                        />
-                      </svg>
-                      <span className="sr-only">Attach file</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      className="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 16 20"
-                      >
-                        <path d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                      </svg>
-                      <span className="sr-only">Set location</span>
-                    </button>
-                    <button
-                      type="button"
-                      className="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 20 18"
-                      >
-                        <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-                      </svg>
-                      <span className="sr-only">Upload image</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="submit"
+                  className="border bg-red-400 px-4 py-2 rounded-lg "
+                >
+                  Post Comment
+                </button>
               </div>
             </form>
           </div>
         ) : (
-          <p>You cannot comment on your own blog.</p>
+          <p>Its not</p>
         )}
-
-        {/* <div className="bg-emerald-950">
-          <form onSubmit={handleComment}>
-            <div className="w-full mb-4 border rounded-lg mt-10">
-              <div className="px-4 py-2  rounded-t-lg dark:bg-gray-800">
-                <label className="sr-only">Your comment</label>
-                <textarea
-                  id="comment"
-                  rows="4"
-                  name="comment"
-                  className="w-full px-0 text-sm rounded-lg text-gray-900 mt-10"
-                  placeholder="Write a comment..."
-                  required
-                ></textarea>
-              </div>
-
-              <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-                <button
-                  type="submit"
-                  className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue"
-                >
-                  Post comment
-                </button>
-                <div className="flex pl-0 space-x-1 sm:pl-2">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 12 20"
-                    >
-                      <path
-                        stroke="currentColor"
-                        d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6"
-                      />
-                    </svg>
-                    <span className="sr-only">Attach file</span>
-                  </button>
-                  <button
-                    type="button"
-                    className="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      viewBox="0 0 16 20"
-                    >
-                      <path d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                    </svg>
-                    <span className="sr-only">Set location</span>
-                  </button>
-                  <button
-                    type="button"
-                    className="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      viewBox="0 0 20 18"
-                    >
-                      <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-                    </svg>
-                    <span className="sr-only">Upload image</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div> */}
       </div>
     </div>
     // <div>

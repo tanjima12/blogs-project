@@ -5,6 +5,7 @@ import NavBar from "../NavBar/Navbar";
 import Tips from "../Tips/Tips";
 import RecentBlog from "../RecentBlog/RecentBlog";
 import swal from "sweetalert";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   const { data: users } = useQuery({
@@ -45,7 +46,7 @@ const Home = () => {
           Latest from the Blog
         </h1>
         <div className="bg">
-          <div className="grid grid-cols-3 mt-5 ml-36  ">
+          <div className="grid grid-cols-3 mt-5  ml-16 ">
             {/* {users && <h1>{users.length}</h1>} */}
             {users &&
               users
@@ -61,6 +62,7 @@ const Home = () => {
         </div>
       </div>
       <Tips></Tips>
+      <Footer></Footer>
     </div>
   );
 };

@@ -19,6 +19,7 @@ import {
 import AllBlogs from "./AllBlogs/AllBlogs";
 import WishList from "./WishList/WishList";
 import Details from "./Details/Details";
+
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([

@@ -209,7 +209,7 @@
 
 .bg {
   /* background-image: url("https://i.ibb.co/BTXnLc3/beautiful-shot-rocky-mountains-covered-with-white-snow-1.jpg"); */
-  background-image: url("https://i.ibb.co/PZXxsL1/image-4-1.jpg");
+  background-image: url("https://i.ibb.co/RDs7N49/beautiful-shot-rocky-mountains-covered-with-white-snow-2.jpg");
   background-repeat: no-repeat;
 }
 
@@ -219,7 +219,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 320px;
+  width: 420px;
+  height: 600px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   padding: 32px;
   overflow: hidden;
