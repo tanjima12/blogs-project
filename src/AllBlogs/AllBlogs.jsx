@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import RecentBlog from "../RecentBlog/RecentBlog";
 import NavBar from "../NavBar/Navbar";
 import { useState } from "react";
+import swal from "sweetalert";
 
 const AllBlogs = () => {
   const [category, setCategory] = useState("");
@@ -17,6 +18,27 @@ const AllBlogs = () => {
     },
   });
   //   console.log(users?.filter((user) => user.title.toLowerCase().includes("C")));
+
+  const handleWishList = async (blog) => {
+    try {
+      const addList = await fetch(`http://localhost:5006/addToWishlist`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(blog),
+      });
+
+      if (addList) {
+        swal("Good job!", "Successfully Added", "success");
+      } else {
+        swal("Sorry", "something is wrong", "error");
+      }
+    } catch (error) {
+      console.log(error);
+      swal("Sorry", "something is wrong", "error");
+    }
+  };
 
   return (
     <div>
@@ -78,7 +100,13 @@ const AllBlogs = () => {
               blog.title.toLowerCase().includes(search.toLowerCase());
 
             if (newcategory && newsearch) {
-              return <RecentBlog key={blog._id} blog={blog}></RecentBlog>;
+              return (
+                <RecentBlog
+                  key={blog._id}
+                  blog={blog}
+                  handleWishList={handleWishList}
+                ></RecentBlog>
+              );
             }
             return null;
           })}

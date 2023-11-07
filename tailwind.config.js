@@ -9,6 +9,7 @@ export default {
     extend: {
       fontFamily: {
         Great: "'Fredericka the Great', serif",
+        courgate: "'Courgette', cursive",
       },
     },
   },

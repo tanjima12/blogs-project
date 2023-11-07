@@ -17,6 +17,8 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import AllBlogs from "./AllBlogs/AllBlogs";
+import WishList from "./WishList/WishList";
+import Details from "./Details/Details";
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -44,6 +46,16 @@ const router = createBrowserRouter([
       {
         path: "/allBlog",
         element: <AllBlogs></AllBlogs>,
+      },
+      {
+        path: "/wishList",
+        element: <WishList></WishList>,
+      },
+      {
+        path: "/details/:id",
+        element: <Details></Details>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5006/blogdetails/${params.id}`),
       },
     ],
   },

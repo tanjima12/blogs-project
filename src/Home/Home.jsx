@@ -4,6 +4,7 @@ import NavBar from "../NavBar/Navbar";
 // import RecentBlog from "../RecentBlog/RecentBlog";
 import Tips from "../Tips/Tips";
 import RecentBlog from "../RecentBlog/RecentBlog";
+import swal from "sweetalert";
 
 const Home = () => {
   const { data: users } = useQuery({
@@ -15,7 +16,26 @@ const Home = () => {
       return res.json();
     },
   });
+  const handleWishList = async (blog) => {
+    try {
+      const addList = await fetch("http://localhost:5006/addToWishlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(blog),
+      });
 
+      if (addList) {
+        swal("Good job!", "Successfully Added", "success");
+      } else {
+        swal("Sorry", "something is wrong", "error");
+      }
+    } catch (error) {
+      console.log(error);
+      swal("Sorry", "something is wrong", "error");
+    }
+  };
   return (
     <div>
       <NavBar></NavBar>
@@ -27,9 +47,16 @@ const Home = () => {
         <div className="bg">
           <div className="grid grid-cols-3 mt-5 ml-36  ">
             {/* {users && <h1>{users.length}</h1>} */}
-            {users?.slice(0, 6).map((blog) => (
-              <RecentBlog key={blog._id} blog={blog}></RecentBlog>
-            ))}
+            {users &&
+              users
+                .slice(0, 6)
+                .map((blog) => (
+                  <RecentBlog
+                    key={blog._id}
+                    blog={blog}
+                    handleWishList={handleWishList}
+                  ></RecentBlog>
+                ))}
           </div>
         </div>
       </div>
