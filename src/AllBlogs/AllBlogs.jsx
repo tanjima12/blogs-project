@@ -21,13 +21,16 @@ const AllBlogs = () => {
 
   const handleWishList = async (blog) => {
     try {
-      const addList = await fetch(`http://localhost:5006/addToWishlist`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(blog),
-      });
+      const addList = await fetch(
+        `http://localhost:5006/addToWishlist/${blog._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(blog),
+        }
+      );
 
       if (addList) {
         swal("Good job!", "Successfully Added", "success");

@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import NavBar from "../NavBar/Navbar";
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
@@ -126,8 +126,10 @@ const Details = () => {
                 <p>{time}</p>
                 <p>{Category}</p>
               </div>
-              {user && user?.email == email ? (
-                <button className="btn">Update</button>
+              {user && user?.email === email ? (
+                <Link to={`/updateBlog/${_id}`}>
+                  <button className="btn">Update</button>
+                </Link>
               ) : (
                 <button className="btn">Read more</button>
               )}

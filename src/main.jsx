@@ -19,6 +19,8 @@ import {
 import AllBlogs from "./AllBlogs/AllBlogs";
 import WishList from "./WishList/WishList";
 import Details from "./Details/Details";
+import Update from "./Update/Update";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 const queryClient = new QueryClient();
 
@@ -50,13 +52,28 @@ const router = createBrowserRouter([
       },
       {
         path: "/wishList",
-        element: <WishList></WishList>,
+        element: (
+          <PrivateRoute>
+            <WishList></WishList>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/details/:id",
         element: <Details></Details>,
         loader: ({ params }) =>
           fetch(`http://localhost:5006/blogdetails/${params.id}`),
+      },
+      {
+        path: "/updateBlog/:id",
+        element: (
+          <PrivateRoute>
+            <Update></Update>
+          </PrivateRoute>
+        ),
+
+        loader: ({ params }) =>
+          fetch(`http://localhost:5006/updateBlog/${params.id}`),
       },
     ],
   },

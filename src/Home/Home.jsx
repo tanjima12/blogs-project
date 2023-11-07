@@ -12,20 +12,23 @@ const Home = () => {
     queryKey: ["AddBlogs"],
     queryFn: async () => {
       const res = await fetch(
-        "http://localhost:5006/addBlog?sortField=time&sortOrder=desc"
+        `http://localhost:5006/addBlog?sortField=time&sortOrder=desc`
       );
       return res.json();
     },
   });
   const handleWishList = async (blog) => {
     try {
-      const addList = await fetch("http://localhost:5006/addToWishlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(blog),
-      });
+      const addList = await fetch(
+        `http://localhost:5006/addToWishlist/${blog._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(blog),
+        }
+      );
 
       if (addList) {
         swal("Good job!", "Successfully Added", "success");
