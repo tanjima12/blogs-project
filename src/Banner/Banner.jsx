@@ -1,9 +1,17 @@
 import { Carousel } from "flowbite-react";
+import { motion } from "framer-motion";
 
 const Banner = () => {
   return (
     <div>
-      <div>
+      <motion.div
+        initial={{ opacity: 0, scale: 2 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.5,
+          delay: 1,
+        }}
+      >
         <div className="relative h-[500px] lg:w-[1250px] mt-10 lg:ml-36  ">
           <Carousel>
             <img src="https://i.ibb.co/CtF1ZPZ/image.jpg" alt="..." />
@@ -55,7 +63,7 @@ const Banner = () => {
             Southeast Asia, Europe, travel hacking, insurance, Paris
           </p>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -22,6 +22,7 @@ import Details from "./Details/Details";
 import Update from "./Update/Update";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import ErrorElement from "./ErrorElement/ErrorElement";
+import FeatureBlog from "./Banner/FeatureBlog/FeatureBlog";
 
 const queryClient = new QueryClient();
 
@@ -85,10 +86,10 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5006/updateBlog/${params.id}`),
       },
-      // {
-      //   path:'/featured',
-      //   element:<
-      // }
+      {
+        path: "/featured",
+        element: <FeatureBlog></FeatureBlog>,
+      },
     ],
   },
 ]);

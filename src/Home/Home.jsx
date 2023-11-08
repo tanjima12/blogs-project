@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Banner from "../Banner/Banner";
 import NavBar from "../NavBar/Navbar";
 // import RecentBlog from "../RecentBlog/RecentBlog";
-import Tips from "../Tips/Tips";
+
 import RecentBlog from "../RecentBlog/RecentBlog";
 import swal from "sweetalert";
 import Footer from "../Footer/Footer";
@@ -33,9 +33,10 @@ const Home = () => {
   };
   const handleWishList = async (blog) => {
     console.log("blog", blog);
+
     try {
       const addList = await fetch(
-        `http://localhost:5006/addToWishlist/${blog._id}`,
+        `http://localhost:5006/addBlog?category=${users.Category}?sortFied=time&sortOrder=desc`,
         {
           method: "POST",
           headers: {
@@ -82,7 +83,6 @@ const Home = () => {
       </div>
       <JoinFamily></JoinFamily>
       <TravelWorld></TravelWorld>
-      <Tips></Tips>
 
       <div className="mt-5 ml-96 ">
         <h2 className="text-2xl font-semibold text-green-950">

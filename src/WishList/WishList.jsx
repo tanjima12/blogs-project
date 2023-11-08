@@ -3,18 +3,30 @@ import { useState, useEffect } from "react";
 import NavBar from "../NavBar/Navbar";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const WishList = () => {
   const [wishlist, setWishlist] = useState([]);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5006/addToWishlist`, {
+    fetch(`http://localhost:5006/addToWishlist?email=${user.email}`, {
       method: "GET",
       credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => setWishlist(data));
   }, []);
+  console.log("wishlist", wishlist);
+  // const { data: wish } = useQuery({
+  //   queryKey: ["AddBlogs"],
+  //   queryFn: async () => {
+  //     const res = await fetch(`http://localhost:5006/addBlog?email=${email}`);
+  //     return res.json();
+  //   },
+  // });
   const handleDelete = (_id) => {
     console.log("dl id", _id);
     Swal.fire({
