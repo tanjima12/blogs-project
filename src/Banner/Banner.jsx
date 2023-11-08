@@ -24,7 +24,7 @@ const Banner = () => {
             <img src="https://i.ibb.co/YLvFDD6/image-2.jpg" alt="..." />
           </Carousel>
         </div>
-        <div className=" absolute top-72 left-80">
+        <div className="absolute top-72 left-30 lg:left-80">
           <h1 className="text-3xl text-white">
             Travel smarter, cheaper, longer <br></br> Where do you want to go?
           </h1>
@@ -56,8 +56,8 @@ const Banner = () => {
             </div>
           </fieldset>
 
-          <p className="text-white text-xl mt-2">
-            <span className="text-white font-semibold text-xl">
+          <p className="text-white lg:text-xl mt-2">
+            <span className="text-white font-semibold lg:text-xl">
               Popular Searches:
             </span>
             Southeast Asia, Europe, travel hacking, insurance, Paris

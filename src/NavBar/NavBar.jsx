@@ -16,7 +16,7 @@ const NavBar = () => {
   };
   return (
     <div>
-      <div className="lg:ml-10 lg:mr-10 mt-5">
+      <div className="lg:ml-10 lg:mr-10 lg:mt-5">
         <Navbar fluid rounded>
           <Navbar.Brand>
             <img

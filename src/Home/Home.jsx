@@ -66,7 +66,7 @@ const Home = () => {
           Latest from the Blog
         </h1>
         <div className="bg">
-          <div className="grid grid-cols-3 mt-5  ml-16 ">
+          <div className="grid grid-cols-1 lg:grid-cols-3 mt-5 ml-1  lg:ml-16 ">
             {/* {users && <h1>{users.length}</h1>} */}
             {users &&
               users
@@ -84,7 +84,7 @@ const Home = () => {
       <JoinFamily></JoinFamily>
       <TravelWorld></TravelWorld>
 
-      <div className="mt-5 ml-96 ">
+      <div className="mt-5 lg:ml-96 ">
         <h2 className="text-2xl font-semibold text-green-950">
           Subscribe to Our Newsletter
         </h2>

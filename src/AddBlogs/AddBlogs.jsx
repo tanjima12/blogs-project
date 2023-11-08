@@ -54,7 +54,7 @@ const AddBlogs = () => {
   return (
     <div>
       <NavBar></NavBar>
-      <div className="flex justify-center gap-10 items-center mt-10 bg-amber-800 pt-24 pb-32 ">
+      <div className="lg:flex lg:ml-0 justify-center gap-10 items-center mt-10 bg-amber-800 pt-24 pb-32 ">
         <div className="w-full max-w-sm p-4  border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           <h5 className="text-xl font-medium text-gray-900 dark:text-white">
             Add Your Blogs
@@ -164,7 +164,7 @@ const AddBlogs = () => {
           </form>
         </div>
         <div>
-          <h1 className="niceName text-6xl text-white font-bold">
+          <h1 className="niceName text-6xl text-white ml-3 lg:ml-0 font-bold">
             Have a nice day and <br />
             be a little better
           </h1>

@@ -49,7 +49,7 @@ const AllBlogs = () => {
       <NavBar></NavBar>
 
       <div className="bg-gradient-to-r from-[#de09c2] to-[#00FFE1]">
-        <div className="flex justify-center">
+        <div className="lg:flex justify-center">
           <div>
             <div className="mt-10">
               <label className="text-white text-xl mr-3">Category:</label>
@@ -80,7 +80,7 @@ const AllBlogs = () => {
                   </svg>
                 </div>
                 <input
-                  className="w-[800px] bg-white pl-2 text-base font-semibold outline-0"
+                  className="lg:w-[800px] bg-white pl-2 text-base font-semibold outline-0"
                   type="text"
                   id="search"
                   value={search}
@@ -95,7 +95,7 @@ const AllBlogs = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 ml-28">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:ml-28">
           {blogs?.map((blog) => {
             const newcategory = !category || blog.Category === category;
 

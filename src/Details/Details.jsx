@@ -54,14 +54,13 @@ const Details = () => {
   // }
 
   const { id } = useParams();
-  // const [blogDetails, setBlogDetails] = useState(null);
+  const [blogDetails, setBlogDetails] = useState(null);
 
-  useEffect(() => {
-    // Make an API request to fetch the blog details
-    fetch(`http://localhost:5006/details/${id}`) // Replace with your actual API endpoint
-      .then((response) => response.json())
-      .then((data) => setBlogDetails(data));
-  }, [id]);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5006/details/${id}`)
+  //     .then((response) => response.json())
+  //     .then((data) => setBlogDetails(data));
+  // }, [id]);
 
   const handleComment = (e) => {
     e.preventDefault();
@@ -110,7 +109,7 @@ const Details = () => {
     <div>
       <NavBar></NavBar>
       <div className="">
-        <div className="flex gap-5 justify-center mt-10 ">
+        <div className="lg:flex gap-5 justify-center mt-10 ">
           <div>
             <img
               src={PhotoUrl}
