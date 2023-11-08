@@ -184,7 +184,7 @@ const Details = () => {
             </form>
           </div>
         ) : (
-          <p className="text-2xl mb-5 text-center">
+          <p className="text-2xl mb-5 text-center mb-5 text-center bg-red-400">
             You do not comment this site
           </p>
         )}
