@@ -6,8 +6,15 @@ import Tips from "../Tips/Tips";
 import RecentBlog from "../RecentBlog/RecentBlog";
 import swal from "sweetalert";
 import Footer from "../Footer/Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useContext, useState } from "react";
+import AuthProvider, { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Home = () => {
+  const { user } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+
   const { data: users } = useQuery({
     queryKey: ["AddBlogs"],
     queryFn: async () => {
@@ -17,6 +24,11 @@ const Home = () => {
       return res.json();
     },
   });
+  const handleSubscribe = () => {
+    toast.success("Thank you for you subscribing");
+
+    setEmail("");
+  };
   const handleWishList = async (blog) => {
     try {
       const addList = await fetch(
@@ -42,6 +54,7 @@ const Home = () => {
   };
   return (
     <div>
+      <ToastContainer></ToastContainer>
       <NavBar></NavBar>
       <Banner></Banner>
       <div className="mt-10">
@@ -65,6 +78,27 @@ const Home = () => {
         </div>
       </div>
       <Tips></Tips>
+
+      <div className="mt-5 ml-96 ">
+        <h2 className="text-2xl font-semibold text-green-950">
+          Subscribe to Our Newsletter
+        </h2>
+        <div className="flex">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className=" p-2 rounded-l w-[550px] "
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button
+            onClick={handleSubscribe}
+            className="bg-orange-950 text-white p-2 rounded-r cursor-pointer"
+          >
+            Subscribe
+          </button>
+        </div>
+      </div>
       <Footer></Footer>
     </div>
   );
