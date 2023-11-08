@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 
 import NavBar from "../NavBar/Navbar";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const WishList = ({ handleWishList }) => {
+const WishList = () => {
   const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
@@ -11,6 +12,34 @@ const WishList = ({ handleWishList }) => {
       .then((res) => res.json())
       .then((data) => setWishlist(data));
   }, []);
+  const handleDelete = (_id) => {
+    console.log("dl id", _id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5006/wishBlog/${_id}`, {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setWishlist(wishlist.filter((wish) => wish._id !== _id));
+          });
+
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  };
 
   return (
     <div>
@@ -43,7 +72,10 @@ const WishList = ({ handleWishList }) => {
                     </h2>
                   </div>
                   <div className="flex justify-between items-end">
-                    <button className="bg-gradient-to-r from-[#43cea2] to-[#185a9d] text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <button
+                      onClick={() => handleDelete(blog._id)}
+                      className="bg-gradient-to-r from-[#43cea2] to-[#185a9d] text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    >
                       Remove
                     </button>
 

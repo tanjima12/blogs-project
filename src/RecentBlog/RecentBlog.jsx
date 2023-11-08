@@ -5,7 +5,7 @@ const RecentBlog = ({ blog, handleWishList }) => {
 
   return (
     <div className="">
-      <div className=" p-4  rounded-lg transform hover:scale-105 transition-transform duration-300 ease-in-out mb-10 mt-10">
+      <div className=" p-4 w-[400px] rounded-lg transform hover:scale-105 transition-transform duration-300 ease-in-out mb-10 mt-10">
         <img
           className="w-full h-48 object-cover rounded-t-lg"
           alt="Card Image"

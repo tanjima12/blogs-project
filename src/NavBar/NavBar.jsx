@@ -79,7 +79,9 @@ const NavBar = () => {
             <Link to="/allBlog" className="text-xl">
               All Blogs
             </Link>
-            <Link className="text-xl">Feature Blogs</Link>
+            <Link to="/featured" className="text-xl">
+              Feature Blogs
+            </Link>
             <Link to="/wishList" className="text-xl">
               WishLists
             </Link>

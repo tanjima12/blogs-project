@@ -21,6 +21,7 @@ import WishList from "./WishList/WishList";
 import Details from "./Details/Details";
 import Update from "./Update/Update";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import ErrorElement from "./ErrorElement/ErrorElement";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorElement></ErrorElement>,
     children: [
       {
         path: "/",
@@ -44,7 +46,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addBlog",
-        element: <AddBlogs></AddBlogs>,
+        element: (
+          <PrivateRoute>
+            <AddBlogs></AddBlogs>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/allBlog",
@@ -60,7 +66,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <Details></Details>,
+        element: (
+          <PrivateRoute>
+            <Details></Details>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5006/blogdetails/${params.id}`),
       },
@@ -75,6 +85,10 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5006/updateBlog/${params.id}`),
       },
+      // {
+      //   path:'/featured',
+      //   element:<
+      // }
     ],
   },
 ]);

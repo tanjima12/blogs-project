@@ -184,7 +184,9 @@ const Details = () => {
             </form>
           </div>
         ) : (
-          <p>Its not</p>
+          <p className="text-2xl mb-5 text-center">
+            You do not comment this site
+          </p>
         )}
       </div>
     </div>
