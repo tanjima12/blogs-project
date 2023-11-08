@@ -31,7 +31,7 @@ const Update = () => {
     };
 
     console.log(updateInfo);
-    fetch(`http://localhost:5006/update/${Info._id}`, {
+    fetch(`https://b8a11-server-side-tanjima12.vercel.app/update/${Info._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

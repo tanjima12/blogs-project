@@ -25,7 +25,7 @@ const Details = () => {
   // const [canComment, setCanComment] = useState(true);
   // const [blogAuthorId, setBlogAuthorId] = useState(null);
   // useEffect(() => {
-  //   fetch(`http://localhost:5006/blog/${blogId}`)
+  //   fetch(`https://b8a11-server-side-tanjima12.vercel.app/blog/${blogId}`)
   //     .then((response) => response.json())
   //     .then((data) => {
   //       setBlogAuthorId(data.authorId);
@@ -37,7 +37,7 @@ const Details = () => {
   // console.log("blog", blogAuthorId);
 
   // useEffect(() => {
-  //   fetch(`http://localhost:5006/comments/${blogId}`)
+  //   fetch(`https://b8a11-server-side-tanjima12.vercel.app/comments/${blogId}`)
   //     .then((response) => response.json())
   //     .then((data) => {
   //       console.log("Fetched comments:", data);
@@ -57,7 +57,7 @@ const Details = () => {
   const [blogDetails, setBlogDetails] = useState(null);
 
   // useEffect(() => {
-  //   fetch(`http://localhost:5006/details/${id}`)
+  //   fetch(`https://b8a11-server-side-tanjima12.vercel.app/details/${id}`)
   //     .then((response) => response.json())
   //     .then((data) => setBlogDetails(data));
   // }, [id]);
@@ -74,8 +74,8 @@ const Details = () => {
       userName: user ? user.displayName : "",
       userProfilePicture: user ? user.photoURL : "",
     };
-    // http://localhost:5006/comment
-    fetch(`http://localhost:5006/comments`, {
+
+    fetch(`https://b8a11-server-side-tanjima12.vercel.app/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,13 +92,13 @@ const Details = () => {
   // const { data } = useQuery({
   //   queryKey: ["AddBlogs"],
   //   queryFn: async () => {
-  //     const res = await fetch(`http://localhost:5006/comments/${_id}`);
+  //     const res = await fetch(`https://b8a11-server-side-tanjima12.vercel.app/comments/${_id}`);
   //     console.log("commentdata", res.json());
   //     return res.json();
   //   },
   // });
   useEffect(() => {
-    fetch(`http://localhost:5006/comments/${_id}`) // Replace with your actual API endpoint
+    fetch(`https://b8a11-server-side-tanjima12.vercel.app/comments/${_id}`)
       .then((response) => response.json())
       .then((data) => {
         setComments(data);
@@ -151,7 +151,6 @@ const Details = () => {
                   <span className="text-xl ">Comment: </span>
                   {comment.comment}
                 </p>
-                {/* <strong>{comment.userName}:</strong> {comment.comment} */}
               </li>
             ))}
           </ul>
