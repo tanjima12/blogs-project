@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import swal from "sweetalert";
 import NavBar from "../NavBar/Navbar";
 import { useContext } from "react";
-import AuthProvider, { AuthContext } from "../AuthProvider/AuthProvider";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Update = () => {
   const { user } = useContext(AuthContext);
