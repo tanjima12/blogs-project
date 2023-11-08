@@ -10,6 +10,8 @@ export default {
       fontFamily: {
         Great: "'Fredericka the Great', serif",
         courgate: "'Courgette', cursive",
+        ursive: "'Edu TAS Beginner', cursive",
+        zeyeda: "'Zeyada', cursive",
       },
     },
   },

@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext, useState } from "react";
 import AuthProvider, { AuthContext } from "../AuthProvider/AuthProvider";
+import JoinFamily from "../JoinFamily/JoinFamily";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -77,6 +78,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <JoinFamily></JoinFamily>
       <Tips></Tips>
 
       <div className="mt-5 ml-96 ">
