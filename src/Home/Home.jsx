@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext, useState } from "react";
 import AuthProvider, { AuthContext } from "../AuthProvider/AuthProvider";
 import JoinFamily from "../JoinFamily/JoinFamily";
+import TravelWorld from "../TravelWorld/TravelWorld";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -31,6 +32,7 @@ const Home = () => {
     setEmail("");
   };
   const handleWishList = async (blog) => {
+    console.log("blog", blog);
     try {
       const addList = await fetch(
         `http://localhost:5006/addToWishlist/${blog._id}`,
@@ -79,6 +81,7 @@ const Home = () => {
         </div>
       </div>
       <JoinFamily></JoinFamily>
+      <TravelWorld></TravelWorld>
       <Tips></Tips>
 
       <div className="mt-5 ml-96 ">

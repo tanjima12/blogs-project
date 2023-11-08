@@ -17,6 +17,7 @@ const AllBlogs = () => {
       return res.json();
     },
   });
+  console.log("all blogs", blogs);
   //   console.log(users?.filter((user) => user.title.toLowerCase().includes("C")));
 
   const handleWishList = async (blog) => {

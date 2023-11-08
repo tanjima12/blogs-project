@@ -1,6 +1,6 @@
 const JoinFamily = () => {
   return (
-    <div className="ml-32">
+    <div className="ml-32 mt-10">
       <h1 className="text-3xl font-ursive mb-1">
         JOIN THE<span className="text-3xl font-zeyeda"> Family</span>
       </h1>

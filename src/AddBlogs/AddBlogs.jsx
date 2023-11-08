@@ -25,7 +25,6 @@ const AddBlogs = () => {
     const time = parseInt(form.time.value);
     const PhotoUrl = form.PhotoUrl.value;
 
-    //  object with all the blog data
     const newBlogEntry = {
       title,
       Category,
@@ -36,6 +35,7 @@ const AddBlogs = () => {
       name,
       Longdescription,
     };
+    console.log("newBlog", newBlogEntry);
 
     fetch("http://localhost:5006/addBlog", {
       method: "POST",

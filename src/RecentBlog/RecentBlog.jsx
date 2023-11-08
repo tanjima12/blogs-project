@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const RecentBlog = ({ blog, handleWishList }) => {
+  const { user } = useContext(AuthContext);
   const { _id, title, Category, ShortDescription, time, PhotoUrl } = blog;
 
   return (
