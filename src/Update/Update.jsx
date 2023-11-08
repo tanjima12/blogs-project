@@ -57,7 +57,7 @@ const Update = () => {
       <div className="flex justify-center gap-10 items-center mt-10 bg-amber-800 pt-24 pb-32 ">
         <div className="w-full max-w-sm p-4  border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
           <h5 className="text-xl font-medium text-gray-900 dark:text-white">
-            Add Your Blogs
+            Update Your Blogs
           </h5>
           <form onSubmit={handleUpdate} className="space-y-6">
             <div>
