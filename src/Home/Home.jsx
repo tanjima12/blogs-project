@@ -36,7 +36,7 @@ const Home = () => {
 
     try {
       const addList = await fetch(
-        `http://localhost:5006/addBlog?category=${users.Category}?sortFied=time&sortOrder=desc`,
+        `http://localhost:5006/addToWishlist/${blog._id}`,
         {
           method: "POST",
           headers: {
