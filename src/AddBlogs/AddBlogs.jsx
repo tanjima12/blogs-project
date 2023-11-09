@@ -2,13 +2,14 @@
 import { useContext } from "react";
 import NavBar from "../NavBar/Navbar";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import swal from "sweetalert";
 
 const AddBlogs = () => {
   const { user } = useContext(AuthContext);
   //   const { data } = useQuery({
   //     queryKey: ["AddBlogs"],
   //     queryFn: async () => {
-  //       const res = await fetch("https://b8a11-server-side-tanjima12.vercel.app/addBlog");
+  //       const res = await fetch("http://localhost:5006/addBlog");
   //       return res.json;
   //     },
   //   });
@@ -37,7 +38,7 @@ const AddBlogs = () => {
     };
     console.log("newBlog", newBlogEntry);
 
-    fetch("https://b8a11-server-side-tanjima12.vercel.app/addBlog", {
+    fetch("http://localhost:5006/addBlog", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +48,9 @@ const AddBlogs = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+
         form.reset();
+        return swal("SuccessFully Submitted");
       });
   };
 

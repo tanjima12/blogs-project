@@ -46,25 +46,17 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
       if (currentUser) {
         axios
-          .post(
-            "//https://b8a11-server-side-tanjima12.vercel.app/jwt",
-            loggedUser,
-            {
-              withCredentials: true,
-            }
-          )
+          .post("http://localhost:5006/jwt", loggedUser, {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log("token response", res.data);
           });
       } else {
         axios
-          .post(
-            "//https://b8a11-server-side-tanjima12.vercel.app/logout",
-            loggedUser,
-            {
-              withCredentials: true,
-            }
-          )
+          .post("http://localhost:5006/logout", loggedUser, {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log(res.data);
           });

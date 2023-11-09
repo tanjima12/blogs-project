@@ -25,7 +25,7 @@ const Details = () => {
   // const [canComment, setCanComment] = useState(true);
   // const [blogAuthorId, setBlogAuthorId] = useState(null);
   // useEffect(() => {
-  //   fetch(`https://b8a11-server-side-tanjima12.vercel.app/blog/${blogId}`)
+  //   fetch(`http://localhost:5006/blog/${blogId}`)
   //     .then((response) => response.json())
   //     .then((data) => {
   //       setBlogAuthorId(data.authorId);
@@ -37,7 +37,7 @@ const Details = () => {
   // console.log("blog", blogAuthorId);
 
   // useEffect(() => {
-  //   fetch(`https://b8a11-server-side-tanjima12.vercel.app/comments/${blogId}`)
+  //   fetch(`http://localhost:5006/comments/${blogId}`)
   //     .then((response) => response.json())
   //     .then((data) => {
   //       console.log("Fetched comments:", data);
@@ -57,7 +57,7 @@ const Details = () => {
   const [blogDetails, setBlogDetails] = useState(null);
 
   // useEffect(() => {
-  //   fetch(`https://b8a11-server-side-tanjima12.vercel.app/details/${id}`)
+  //   fetch(`http://localhost:5006/details/${id}`)
   //     .then((response) => response.json())
   //     .then((data) => setBlogDetails(data));
   // }, [id]);
@@ -75,7 +75,7 @@ const Details = () => {
       userProfilePicture: user ? user.photoURL : "",
     };
 
-    fetch(`https://b8a11-server-side-tanjima12.vercel.app/comments`, {
+    fetch(`http://localhost:5006/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,13 +92,13 @@ const Details = () => {
   // const { data } = useQuery({
   //   queryKey: ["AddBlogs"],
   //   queryFn: async () => {
-  //     const res = await fetch(`https://b8a11-server-side-tanjima12.vercel.app/comments/${_id}`);
+  //     const res = await fetch(`http://localhost:5006/comments/${_id}`);
   //     console.log("commentdata", res.json());
   //     return res.json();
   //   },
   // });
   useEffect(() => {
-    fetch(`https://b8a11-server-side-tanjima12.vercel.app/comments/${_id}`)
+    fetch(`http://localhost:5006/comments/${_id}`)
       .then((response) => response.json())
       .then((data) => {
         setComments(data);
@@ -109,11 +109,11 @@ const Details = () => {
     <div>
       <NavBar></NavBar>
       <div className="">
-        <div className="lg:flex gap-5 justify-center mt-10 ">
+        <div className=" lg:flex lg:gap-5 justify-center mt-10 ">
           <div>
             <img
               src={PhotoUrl}
-              className="h-[600px] w-[500px] rounded-3xl"
+              className="mb-4 h-[600px] w-[500px] rounded-3xl"
             ></img>
           </div>
           <div className="card ">

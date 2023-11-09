@@ -21,7 +21,7 @@ const Home = () => {
     queryKey: ["AddBlogs"],
     queryFn: async () => {
       const res = await fetch(
-        `https://b8a11-server-side-tanjima12.vercel.app/addBlog?sortField=time&sortOrder=desc`
+        `http://localhost:5006/addBlog?sortField=time&sortOrder=desc`
       );
       return res.json();
     },
@@ -35,14 +35,18 @@ const Home = () => {
     console.log("blog", blog);
 
     try {
+      const dataToSend = {
+        ...blog,
+        userEmail: user.email,
+      };
       const addList = await fetch(
-        `https://b8a11-server-side-tanjima12.vercel.app/addToWishlist/${blog._id}`,
+        `http://localhost:5006/addToWishlist/${blog._id}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(blog),
+          body: JSON.stringify(dataToSend),
         }
       );
 
@@ -61,11 +65,11 @@ const Home = () => {
       <ToastContainer></ToastContainer>
       <NavBar></NavBar>
       <Banner></Banner>
-      <div className="mt-10">
+      <div className="lg:mt-10">
         <h1 className="text-4xl text-emerald-950 font-Great text-center">
           Latest from the Blog
         </h1>
-        <div className="bg">
+        <div className=" bg-gradient-to-r from-[#bd85b5] to-[#7ff5e8] ">
           <div className="grid grid-cols-1 lg:grid-cols-3 mt-5 ml-1  lg:ml-16 ">
             {users &&
               users

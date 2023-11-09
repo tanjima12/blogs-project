@@ -39,7 +39,7 @@ const LogIn = () => {
         const user = { email };
 
         axios
-          .post("https://b8a11-server-side-tanjima12.vercel.app/jwt", user, {
+          .post("http://localhost:5006/jwt", user, {
             withCredentials: true,
           })
           .then((res) => {

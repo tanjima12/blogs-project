@@ -73,9 +73,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://b8a11-server-side-tanjima12.vercel.app/blogdetails/${params.id}`
-          ),
+          fetch(`http://localhost:5006/blogdetails/${params.id}`),
       },
       {
         path: "/updateBlog/:id",
@@ -86,9 +84,7 @@ const router = createBrowserRouter([
         ),
 
         loader: ({ params }) =>
-          fetch(
-            `https://b8a11-server-side-tanjima12.vercel.app/updateBlog/${params.id}`
-          ),
+          fetch(`http://localhost:5006/updateBlog/${params.id}`),
       },
       {
         path: "/featured",

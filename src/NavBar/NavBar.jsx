@@ -1,6 +1,6 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaUserAlt } from "react-icons/fa";
 
@@ -70,21 +70,66 @@ const NavBar = () => {
             )}
           </div>
           <Navbar.Collapse>
-            <Link to="/" className="text-xl">
+            <NavLink
+              to="/"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "text-red-600 text-xl"
+                  : "text-black text-xl"
+              }
+            >
               Home
-            </Link>
-            <Link to="/addBlog" className="text-xl">
+            </NavLink>
+            <NavLink
+              to="/addBlog"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "text-red-600 text-xl"
+                  : "text-black text-xl"
+              }
+            >
               Add Blog
-            </Link>
-            <Link to="/allBlog" className="text-xl">
+            </NavLink>
+            <NavLink
+              to="/allBlog"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "text-red-600 text-xl"
+                  : "text-black text-xl"
+              }
+            >
               All Blogs
-            </Link>
-            <Link to="/featured" className="text-xl">
+            </NavLink>
+            <NavLink
+              to="/featured"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "text-red-600 text-xl"
+                  : "text-black text-xl"
+              }
+            >
               Feature Blogs
-            </Link>
-            <Link to="/wishList" className="text-xl">
+            </NavLink>
+            <NavLink
+              to="/wishList"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "text-red-600 text-xl"
+                  : "text-black text-xl"
+              }
+            >
               WishLists
-            </Link>
+            </NavLink>
           </Navbar.Collapse>
         </Navbar>
       </div>

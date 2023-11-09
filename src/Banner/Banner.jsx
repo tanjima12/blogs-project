@@ -12,7 +12,7 @@ const Banner = () => {
           delay: 1,
         }}
       >
-        <div className="relative h-[500px] lg:w-[1250px] mt-10 lg:ml-36  ">
+        <div className="relative h-[500px] lg:w-[1250px] mt-5 lg:mt-10 lg:ml-36  ">
           <Carousel>
             <img src="https://i.ibb.co/CtF1ZPZ/image.jpg" alt="..." />
             <img
@@ -24,7 +24,7 @@ const Banner = () => {
             <img src="https://i.ibb.co/YLvFDD6/image-2.jpg" alt="..." />
           </Carousel>
         </div>
-        <div className="absolute top-72 left-30 lg:left-80">
+        <div className="absolute top-[240px] lg:top-72 left-30 lg:left-80">
           <h1 className="text-3xl text-white">
             Travel smarter, cheaper, longer <br></br> Where do you want to go?
           </h1>

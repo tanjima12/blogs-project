@@ -12,7 +12,7 @@ const AllBlogs = () => {
     queryKey: ["AddBlogs"],
     queryFn: async () => {
       const res = await fetch(
-        `https://b8a11-server-side-tanjima12.vercel.app/addBlog?category=${category}&sortField=time&sortOrder=desc&search=${search}`
+        `http://localhost:5006/addBlog?category=${category}&sortField=time&sortOrder=desc&search=${search}`
       );
       return res.json();
     },
@@ -23,7 +23,7 @@ const AllBlogs = () => {
   const handleWishList = async (blog) => {
     try {
       const addList = await fetch(
-        `https://b8a11-server-side-tanjima12.vercel.app/addToWishlist/${blog._id}`,
+        `http://localhost:5006/addToWishlist/${blog._id}`,
         {
           method: "POST",
           headers: {
@@ -50,7 +50,7 @@ const AllBlogs = () => {
 
       <div className="bg-gradient-to-r from-[#de09c2] to-[#00FFE1]">
         <div className="lg:flex justify-center">
-          <div>
+          <div className="pt-3 ml-16 lg:ml-0 ml-:pt-0">
             <div className="mt-10">
               <label className="text-white text-xl mr-3">Category:</label>
               <select
