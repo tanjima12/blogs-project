@@ -13,7 +13,9 @@ const FeatureBlog = () => {
   } = useQuery({
     queryKey: ["AddBlogs"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5006/addBlog`);
+      const res = await fetch(
+        `https://b8a11-server-side-tanjima12.vercel.app/addBlog`
+      );
       return res.json();
     },
   });

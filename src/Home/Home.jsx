@@ -21,7 +21,7 @@ const Home = () => {
     queryKey: ["AddBlogs"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5006/addBlog?sortField=time&sortOrder=desc`
+        `https://b8a11-server-side-tanjima12.vercel.app/addBlog?sortField=time&sortOrder=desc`
       );
       return res.json();
     },
@@ -40,7 +40,7 @@ const Home = () => {
         userEmail: user.email,
       };
       const addList = await fetch(
-        `http://localhost:5006/addToWishlist/${blog._id}`,
+        `https://b8a11-server-side-tanjima12.vercel.app/addToWishlist/${blog._id}`,
         {
           method: "POST",
           headers: {

@@ -12,10 +12,13 @@ const WishList = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5006/addToWishlist/?email=${user.userEmail}`, {
-      method: "GET",
-      credentials: "include",
-    })
+    fetch(
+      `https://b8a11-server-side-tanjima12.vercel.app/addToWishlist/?email=${user.userEmail}`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    )
       .then((res) => res.json())
       .then((data) => setWishlist(data));
   }, [user?.userEmail]);
@@ -23,7 +26,7 @@ const WishList = () => {
   // const { data: wish } = useQuery({
   //   queryKey: ["AddBlogs"],
   //   queryFn: async () => {
-  //     const res = await fetch(`http://localhost:5006/addBlog?email=${email}`);
+  //     const res = await fetch(`https://b8a11-server-side-tanjima12.vercel.app/addBlog?email=${email}`);
   //     return res.json();
   //   },
   // });
@@ -39,12 +42,15 @@ const WishList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5006/wishBlog/${_id}`, {
-          method: "DELETE",
-          headers: {
-            "content-type": "application/json",
-          },
-        })
+        fetch(
+          `https://b8a11-server-side-tanjima12.vercel.app/wishBlog/${_id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "content-type": "application/json",
+            },
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
