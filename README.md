@@ -7,4 +7,4 @@ it is my blog website.Here i work about Travel blog.its name is Roam Travel.i ad
 - user can wishlist their favourite blogs and can see blog details
 - user can also search their favourite blogs
   ### Technology used:
-  -tailwind,mongodb,express,nodejs,reactjs,material tailwind
+  - tailwind,mongodb,express,nodejs,reactjs,material tailwind
